@@ -1,0 +1,85 @@
+#6)to print the nature of roots of a quadratic equation using FUNCTION. The type of function is with arguments and with return type.
+def quadratic(a, b, c):
+    if a != 0:
+        d = (b ** 2) - (4 * a * c)
+        if d == 0:
+            res = -b / (2 * a)
+            return res
+        elif d > 0:
+            res1 = (-b + (d) ** 0.5) / (2 * a)
+            res2 = (-b - (d) ** 0.5) / (2 * a)
+            return res1, res2
+        else:
+            return "It is a complex number"
+    else:
+        return "The given equation is not quadratic"
+
+print("\t\tROOTS OF QUADRATIC EQUATION")
+no1 = int(input("Enter the coefficient of x^2: "))
+no2 = int(input("Enter the coefficient of x: "))
+no3 = int(input("Enter the coefficient of constant: "))
+answer = quadratic(no1, no2, no3)
+print("The result is:", answer)
+
+
+#10)
+import numpy as np
+from scipy import linalg 
+# We are trying to solve a linear algebra system which can be given as 
+# x + y +z = 2
+# 6x -4y + 5z = 31 
+# 5x + 2y +2z = 13
+# Creating input array 
+a = np.array([[1, 1, 1], [6, -4, 5], [5, 2, 2]]) 
+b = np.array([[2], [31], [13]]) 
+# Solve the linear algebra 
+result = linalg.solve(a, b) 
+# Print results 
+print("x={} y={} z={}".format(int(result[0]),int(result[1]),int(result[2])))
+
+#Finding Determinant of the given matrix
+#  4 -3 0
+#  2 -1 -2
+#  1 5 7
+
+from scipy import linalg 
+import numpy as np 
+#Declaring the numpy array 
+A = np.array([[4 ,-3, 0],[2 ,-1, -2],[1 ,5 ,7]])
+#Passing the values to the det function 
+x = linalg.det(A) 
+#printing the result 
+print("The Determinant of the given matrix is ",x)
+
+
+#27 Pandas
+import pandas as pd
+data = {'Employee':['Sahay','George','Priya','Manila','Raina','Manila','Priya'],'Sales':[125600,235600,213400,189000,456000,172000,201400],'Quarter':[1,1,1,1,1,2,2],'State':['Delhi','Tamil Nadu','Kerala','Haryana','West Bengal','Haryana','Kerala']}
+# displaying the DataFrame
+df=pd.DataFrame(data)
+df
+
+df.loc[(df['Quarter'] == 1),['Quarter','State']]
+
+df.loc[(df['Quarter'] == 2),['Quarter','Employee']]
+
+df[['Employee','State']]
+
+df.loc[(df['Sales'] > 200000),['Employee','Sales']]
+
+df.groupby('State')['Sales'].sum()
+
+df.groupby('Quarter')['Sales'].agg(['mean', 'median', 'max', 'min'])
+
+df[df['Sales'] > df[df['State'] == 'Kerala']['Sales'].mean()]
+
+df['Employee'].unique()
+
+df[df.State.str.contains('e')]['State'].unique()
+
+import matplotlib.pyplot as plt
+df.plot.bar(x='Employee', y='Sales',color='blue')
+plt.title('Employee vs Sales')
+plt.xlabel('Employee')
+plt.ylabel('Sales')
+plt.show()
