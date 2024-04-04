@@ -1,0 +1,20 @@
+print("\t\tPRIME NUMBERS BETWEEN m AND n")
+def prime():
+    try:
+        n = int(input("Enter the ending number: "))
+        if n>0:
+            print("Prime Numbers from {} to {} are".format(1,n))
+            for i in range(1,n+1):
+                flag = 0
+                for j in range(2,i):
+                    if(i % j == 0):
+                        flag += 1
+                if (flag == 0):
+                    print(i ,end = " ")
+        else:
+            print("Enter positive number")
+            prime()
+    except ValueError:
+        print("n is not an integer")
+        prime()
+prime()
