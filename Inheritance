@@ -1,0 +1,210 @@
+#Hybrid Inheritance
+
+#class 1
+class Base1:
+    def get1(self):
+        self.snum = int(input("Enter the Student Roll No:"))
+        self.sname = input("Enter the Student Name:")
+        
+    def put1(self):
+        print("Student Rollno: ", self.snum)
+        print("Student Name: ", self.sname)
+
+#child class of class 1
+class Base2(Base1):
+    def get2(self):
+        #inheriting the fuctions of parent class
+        Base1.get1(self)
+        Base1.put1(self)
+        
+        self.mark1 = int(input("Enter the Mark1:"))
+        self.mark2 = int(input("Enter the Mark2:"))
+        
+    def put2(self):
+        print("Mark1: ", self.mark1)
+        print("Mark2: ", self.mark2)
+
+#independent class
+#class 2
+class Base3:
+    def get3(self):
+        self.score = int(input("Enter the score: "))
+    def put3(self):
+        print("Score: ", self.score)
+
+
+#child class of class 1 and class 2
+class Child(Base2, Base3):
+    def put4(self):
+        #inheriting the fuctions of parent classes
+        Base2.get2(self)
+        Base2.put2(self)
+        Base3.get3(self)
+        Base3.put3(self)
+        
+        self.total = self.mark1 + self.mark2 + self.score
+        print("The total score of the student: ",self.total)
+
+s = Child()
+s.put4()
+
+#multiple Inheritance
+
+#parent class1
+class Base1:
+    def get1(self):
+        self.num1 = int(input("Enter Number 1: "))
+    def put1(self):
+        print("Number 1: ", self.num1)
+        
+#parent class2
+class Base2:
+    def get2(self):
+        self.num2 = int(input("Enter Number 2: "))
+    def put2(self):
+        print("Number 2: ", self.num2)
+        
+#child class
+class Child(Base1, Base2):
+    def put3(self):
+         #inheriting the fuctions of parent classes
+        Base1.get1(self)
+        Base2.get2(self)
+        Base1.put1(self)    
+        Base2.put2(self)
+        
+        print("Addition: " , self.num1 + self.num2)
+        print("Subtraction: " , self.num1 - self.num2)
+        print("Multiplication: " , self.num1 * self.num2)
+        print("Division: " , self.num1 / self.num2)
+        print("Floor Division: " , self.num1 // self.num2)
+        print("Modulus: " , self.num1 % self.num2)
+        print("Exponentation: " , self.num1 ** self.num2)
+
+        if self.num1 > self.num2:
+            print(self.num1 , "is the greatest number")
+        else:
+            print(self.num2 , "is the greatest number")
+
+c = Child()
+c.put3()
+
+#multilevel inheritance
+
+#parent class
+class Empbase:
+    def get1(self):
+        self.enum = int(input("Enter Employee ID: "))
+        self.ename = input("Enter Employee Name: ")
+        self.basic = int(input("Enter the Basic Pay:"))
+    def put1(self):
+        print("Employee ID: ",self.enum)
+        print("Employee Name: ",self.ename)
+        print("Basic Pay: ",self.basic)
+
+#child class
+class Empchild1(Empbase):
+    def get2(self):
+        #inheriting the fuctions of parent classes
+        Empbase.get1(self)
+        Empbase.put1(self)
+        
+        self.allow = int(input("Enter Allowance: "))
+        self.ded = int(input("Enter Deduction: "))
+        
+    def put2(self):
+        print("Allowance: ",self.allow)
+        print("Deduction: ",self.ded)
+        
+class Empchild2(Empchild1):
+    def get3(self):
+        #inheriting the fuctions of parent classes
+        Empchild1.get2(self)
+        Empchild1.put2(self)
+        
+        self.gross = self.basic + self.allow
+        self.net = self.gross - self.ded
+    def put3(self):
+        print("Gross: ",self.gross)
+        print("Net: ",self.net)
+        
+#main
+obj = Empchild2()
+obj.get3()
+obj.put3()
+
+#single inheritance
+
+#parent class
+class Empbase:
+    def get(self):
+        self.enum = int(input("Enter Employee ID: "))
+        self.ename = input("Enter Employee Name: ")
+        self.basic = int(input("Enter the Basic Pay:"))
+    def put(self):
+        print("Employee ID: ",self.enum)
+        print("Employee Name: ",self.ename)
+        print("Basic Pay: ",self.basic)
+
+#child class
+class Empchild(Empbase):
+    def get(self):
+        #inheriting the fuctions of parent classes
+        Empbase.get(self)
+        Empbase.put(self)
+        
+        self.allow = int(input("Enter Allowance: "))
+        self.ded = int(input("Enter Deduction: "))
+        self.gross = self.basic + self.allow
+        self.net = self.gross - self.ded
+        
+    def put(self):
+        print("Gross: ",self.gross)
+        print("Net: ",self.net)
+
+#main
+obj = Empchild()
+obj.get()
+obj.put()
+
+#Hierarchical inheritance
+
+class Base:
+    def get(self):
+        self.num1 = int(input("Enter Number 1: "))
+        self.num2 = int(input("Enter Number 2: "))
+    def put(self):
+        print("Number 1: ", self.num1)
+        print("Number 2: ", self.num2)
+
+class Child1(Base):
+    def put1(self):
+        #inheriting the fuctions of parent classes
+        Base.get(self)
+        Base.put(self)
+        
+        print("Arithmetic Operations")
+        print("Addition: " , self.num1 + self.num2)
+        print("Subtraction: " , self.num1 - self.num2)
+        print("Multiplication: " , self.num1 * self.num2)
+        print("Division: " , self.num1 / self.num2)
+        print("Floor Division: " , self.num1 // self.num2)
+        print("Modulus: " , self.num1 % self.num2)
+        print("Exponentation: " , self.num1 ** self.num2)
+
+class Child2(Base):
+     def put2(self):
+        #inheriting the fuctions of parent classes
+        Base.get(self)
+        Base.put(self)
+        
+        print("Logical Operations")
+        print("Logical and: ",self.num1 and self.num2)
+        print("Logical or: ",self.num1 or self.num2)
+        print("Logical not: ", not self.num1)
+        print("Logical not: ", not self.num2)
+
+c1 = Child1()
+c2 = Child2()
+c1.put1()
+c2.put2()
