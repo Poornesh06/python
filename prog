@@ -1,0 +1,1204 @@
+#3)Reverse a given number and find the sum of its digits using function reverse()
+def reverse():
+    num=int(input("Enter a number:"))
+    print("The given number is ",num)
+    sum=0
+    print("Reversed number is ",end="")
+    while(num>0):
+        r=num%10
+        print(r,end="")
+        sum=sum+r
+        num//=10 #num=num//10
+    print("\nSum of its digits is",sum) 
+reverse()
+Enter a number:34
+The given number is  34
+Reversed number is 43
+Sum of its digits is 7
+#4)Code to print the number as PRIME or NOT from 1 to n using FUNCTION prime(). Raise exception when “n” is not a number.
+print("\t\tPRIME NUMBERS BETWEEN m AND n")
+def prime():
+    try:
+        n = int(input("Enter the ending number: "))
+        if n>0:
+            print("Prime Numbers from {} to {} are".format(1,n))
+            for i in range(1,n+1):
+                flag = 0
+                for j in range(2,i):
+                    if(i % j == 0):
+                        flag += 1
+                if (flag == 0):
+                    print(i ,end = " ")
+        else:
+            print("Enter positive number")
+            prime()
+    except ValueError:
+        print("n is not an integer")
+        prime()
+prime()
+		PRIME NUMBERS BETWEEN m AND n
+Enter the ending number: 45
+Prime Numbers from 1 to 45 are
+1 2 3 5 7 11 13 17 19 23 29 31 37 41 43 
+#5)to print the list of perfect numbers from 1 to n using FUNCTION perfect(). The type of function is with arguments and no return type.
+def perfect(start, end):
+    perfect_numbers = []
+    for num in range(start, end + 1):
+        sum_factors = 0
+        for i in range(1, num):
+            if num % i == 0:
+                sum_factors += i
+        if sum_factors == num:
+            perfect_numbers.append(num)
+    if len(perfect_numbers) == 0:
+        print("There are no perfect numbers in the given range.")
+    else:
+        print("Perfect numbers in the range", start, "to", end, "are:", perfect_numbers)
+
+
+
+print("FINDING PERFECT NUMBER SERIES")
+start = int(input("Enter the starting number: "))
+end = int(input("Enter the ending number: "))
+perfect(start, end)
+FINDING PERFECT NUMBER SERIES
+Enter the starting number: 1
+Enter the ending number: 36
+Perfect numbers in the range 1 to 36 are: [6, 28]
+#6)to print the nature of roots of a quadratic equation using FUNCTION. The type of function is with arguments and with return type.
+def quadratic(a, b, c):
+    if a != 0:
+        d = (b ** 2) - (4 * a * c)
+        if d == 0:
+            res = -b / (2 * a)
+            return res
+        elif d > 0:
+            res1 = (-b + (d) ** 0.5) / (2 * a)
+            res2 = (-b - (d) ** 0.5) / (2 * a)
+            return res1, res2
+        else:
+            return "It is a complex number"
+    else:
+        return "The given equation is not quadratic"
+
+print("\t\tROOTS OF QUADRATIC EQUATION")
+no1 = int(input("Enter the coefficient of x^2: "))
+no2 = int(input("Enter the coefficient of x: "))
+no3 = int(input("Enter the coefficient of constant: "))
+answer = quadratic(no1, no2, no3)
+print("The result is:", answer)
+		ROOTS OF QUADRATIC EQUATION
+Enter the coefficient of x^2: 1
+Enter the coefficient of x: -5
+Enter the coefficient of constant: 6
+The result is: (3.0, 2.0)
+#10)
+import numpy as np
+from scipy import linalg 
+# We are trying to solve a linear algebra system which can be given as 
+# x + y +z = 2
+# 6x -4y + 5z = 31 
+# 5x + 2y +2z = 13
+# Creating input array 
+a = np.array([[1, 1, 1], [6, -4, 5], [5, 2, 2]]) 
+b = np.array([[2], [31], [13]]) 
+# Solve the linear algebra 
+result = linalg.solve(a, b) 
+# Print results 
+print("x={} y={} z={}".format(int(result[0]),int(result[1]),int(result[2])))
+
+#Finding Determinant of the given matrix
+#  4 -3 0
+#  2 -1 -2
+#  1 5 7
+
+from scipy import linalg 
+import numpy as np 
+#Declaring the numpy array 
+A = np.array([[4 ,-3, 0],[2 ,-1, -2],[1 ,5 ,7]])
+#Passing the values to the det function 
+x = linalg.det(A) 
+#printing the result 
+print("The Determinant of the given matrix is ",x)
+x=3 y=-2 z=0
+The Determinant of the given matrix is  60.0
+27
+#27 Pandas
+import pandas as pd
+data = {'Employee':['Sahay','George','Priya','Manila','Raina','Manila','Priya'],'Sales':[125600,235600,213400,189000,456000,172000,201400],'Quarter':[1,1,1,1,1,2,2],'State':['Delhi','Tamil Nadu','Kerala','Haryana','West Bengal','Haryana','Kerala']}
+# displaying the DataFrame
+df=pd.DataFrame(data)
+df
+Employee	Sales	Quarter	State
+0	Sahay	125600	1	Delhi
+1	George	235600	1	Tamil Nadu
+2	Priya	213400	1	Kerala
+3	Manila	189000	1	Haryana
+4	Raina	456000	1	West Bengal
+5	Manila	172000	2	Haryana
+6	Priya	201400	2	Kerala
+df.loc[(df['Quarter'] == 1),['Quarter','State']]
+Quarter	State
+0	1	Delhi
+1	1	Tamil Nadu
+2	1	Kerala
+3	1	Haryana
+4	1	West Bengal
+df.loc[(df['Quarter'] == 2),['Quarter','Employee']]
+Quarter	Employee
+5	2	Manila
+6	2	Priya
+df[['Employee','State']]
+Employee	State
+0	Sahay	Delhi
+1	George	Tamil Nadu
+2	Priya	Kerala
+3	Manila	Haryana
+4	Raina	West Bengal
+5	Manila	Haryana
+6	Priya	Kerala
+df.loc[(df['Sales'] > 200000),['Employee','Sales']]
+Employee	Sales
+1	George	235600
+2	Priya	213400
+4	Raina	456000
+6	Priya	201400
+df.groupby('State')['Sales'].sum()
+State
+Delhi          125600
+Haryana        361000
+Kerala         414800
+Tamil Nadu     235600
+West Bengal    456000
+Name: Sales, dtype: int64
+df.groupby('Quarter')['Sales'].agg(['mean', 'median', 'max', 'min'])
+mean	median	max	min
+Quarter				
+1	243920.0	213400.0	456000	125600
+2	186700.0	186700.0	201400	172000
+#doubt
+df[df['Sales'] > df[df['State'] == 'Kerala']['Sales'].mean()]
+Employee	Sales	Quarter	State
+1	George	235600	1	Tamil Nadu
+2	Priya	213400	1	Kerala
+4	Raina	456000	1	West Bengal
+df['Employee'].unique()
+array(['Sahay', 'George', 'Priya', 'Manila', 'Raina'], dtype=object)
+df[df.State.str.contains('e')]['State'].unique()
+array(['Delhi', 'Kerala', 'West Bengal'], dtype=object)
+import matplotlib.pyplot as plt
+df.plot.bar(x='Employee', y='Sales',color='blue')
+plt.title('Employee vs Sales')
+plt.xlabel('Employee')
+plt.ylabel('Sales')
+plt.show()
+
+25
+import pandas as pd
+data = {'Courses':["Spark","PySpark","Hadoop","Python","Pandas",None,"Spark","Python"],'Fee' :[22000,25000,23000,24000,np.nan,25000,25000,22000],
+'Duration':[30,50,55,40,60,35,45,50],'Discount':[1000,2300,1000,1200,2500,1300,1400,1600]}
+# displaying the DataFrame
+df=pd.DataFrame(data)
+df
+Courses	Fee	Duration	Discount
+0	Spark	22000.0	30	1000
+1	PySpark	25000.0	50	2300
+2	Hadoop	23000.0	55	1000
+3	Python	24000.0	40	1200
+4	Pandas	NaN	60	2500
+5	None	25000.0	35	1300
+6	Spark	25000.0	45	1400
+7	Python	22000.0	50	1600
+df.shape
+(8, 4)
+df.dtypes
+Courses      object
+Fee         float64
+Duration      int64
+Discount      int64
+dtype: object
+df.iloc[[1, 3, 5], [0, 2]]
+Courses	Duration
+1	PySpark	50
+3	Python	40
+5	None	35
+df.loc[(df['Discount'] > 1000) & (df['Discount'] <2000),['Courses','Discount']]
+Courses	Discount
+3	Python	1200
+5	None	1300
+6	Spark	1400
+7	Python	1600
+df['Tutors']=['William', 'Henry', 'Michael', 'John', 'Messi', 'Ramana','Kumar','Vasu']
+df
+Courses	Fee	Duration	Discount	Tutors
+0	Spark	22000.0	30	1000	William
+1	PySpark	25000.0	50	2300	Henry
+2	Hadoop	23000.0	55	1000	Michael
+3	Python	24000.0	40	1200	John
+4	Pandas	NaN	60	2500	Messi
+5	None	25000.0	35	1300	Ramana
+6	Spark	25000.0	45	1400	Kumar
+7	Python	22000.0	50	1600	Vasu
+df=df.rename(columns={'Fee': 'Fees'})
+df
+Courses	Fees	Duration	Discount	Tutors
+0	Spark	22000.0	30	1000	William
+1	PySpark	25000.0	50	2300	Henry
+2	Hadoop	23000.0	55	1000	Michael
+3	Python	24000.0	40	1200	John
+4	Pandas	NaN	60	2500	Messi
+5	None	25000.0	35	1300	Ramana
+6	Spark	25000.0	45	1400	Kumar
+7	Python	22000.0	50	1600	Vasu
+df.isnull().sum()
+Courses     1
+Fees        1
+Duration    0
+Discount    0
+Tutors      0
+dtype: int64
+df[(df.Tutors.str.startswith('P'))]
+Courses	Fees	Duration	Discount	Tutors
+df.loc[(df['Duration'] > 40) ,['Courses','Duration']]
+Courses	Duration
+1	PySpark	50
+2	Hadoop	55
+4	Pandas	60
+6	Spark	45
+7	Python	50
+df.groupby('Courses')[['Fees', 'Discount']].mean()
+Fees	Discount
+Courses		
+Hadoop	23000.0	1000.0
+Pandas	NaN	2500.0
+PySpark	25000.0	2300.0
+Python	23000.0	1400.0
+Spark	23500.0	1200.0
+26
+import pandas as pd
+data ={"country": ["Brazil", "Russia", "India", "China", "South Africa"],
+"capital": ["Brasilia", "Moscow", "New Delhi", "Beijing", "Pretoria"],
+"area": [8.516, 17.10, 3.286, 9.597, 1.221],
+"population": [200.4, 143.5, 1252, 1357, 52.98]}
+df=pd.DataFrame(data)
+df
+country	capital	area	population
+0	Brazil	Brasilia	8.516	200.40
+1	Russia	Moscow	17.100	143.50
+2	India	New Delhi	3.286	1252.00
+3	China	Beijing	9.597	1357.00
+4	South Africa	Pretoria	1.221	52.98
+df.sort_values(by='population', ascending=False)
+country	capital	area	population
+3	China	Beijing	9.597	1357.00
+2	India	New Delhi	3.286	1252.00
+0	Brazil	Brasilia	8.516	200.40
+1	Russia	Moscow	17.100	143.50
+4	South Africa	Pretoria	1.221	52.98
+import matplotlib.pyplot as plt
+plt.pie(df['area'], labels=df['country'], autopct='%1.1f%%')
+plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+plt.title('Area Occupied by Each Country')
+plt.show()
+
+plt.bar(df['country'], df['population'], color='skyblue')
+plt.xlabel('Country')
+plt.ylabel('Population (in millions)')
+plt.title('Population of Each Country')
+plt.show()
+
+df[['country', 'population']]
+country	population
+0	Brazil	200.40
+1	Russia	143.50
+2	India	1252.00
+3	China	1357.00
+4	South Africa	52.98
+df[df['country'] == 'Russia']['capital'].values[0]
+'Moscow'
+df[df['country'] == 'Russia']['capital']
+1    Moscow
+Name: capital, dtype: object
+df[df['capital'].str.endswith('a')]
+country	capital	area	population
+0	Brazil	Brasilia	8.516	200.40
+4	South Africa	Pretoria	1.221	52.98
+df[(df.capital.str.endswith('a'))]
+country	capital	area	population
+0	Brazil	Brasilia	8.516	200.40
+4	South Africa	Pretoria	1.221	52.98
+df.isnull()
+country	capital	area	population
+0	False	False	False	False
+1	False	False	False	False
+2	False	False	False	False
+3	False	False	False	False
+4	False	False	False	False
+df.sort_values(by='area').iloc[0]['country']
+'South Africa'
+df.loc[(df['area'] > 7) ,['country','area']]
+country	area
+0	Brazil	8.516
+1	Russia	17.100
+3	China	9.597
+df.columns
+Index(['country', 'capital', 'area', 'population'], dtype='object')
+28
+import pandas as pd
+data = {"Name": ["Asha", "Harsh", "Sourav", "Hritik", "Shivansh", "Akash", "Soumya", "Karthik"],
+    "Dept": ["Administration", "Marketing", "Technical", "Technical", "Administration", "Marketing", "Technical", "Administration"],
+    "Type": ["Fulltime", "Intern", "Intern", "Parttime", "Parttime", "Fulltime", "Intern", "Intern"],
+    "Salary": [120000, 50000, 70000, 67800, 55000, 57900, 64300, 110000],
+    "Years": [10, 2, 3, 4, 7, 3, 2, 8]}
+df=pd.DataFrame(data)
+df
+Name	Dept	Type	Salary	Years
+0	Asha	Administration	Fulltime	120000	10
+1	Harsh	Marketing	Intern	50000	2
+2	Sourav	Technical	Intern	70000	3
+3	Hritik	Technical	Parttime	67800	4
+4	Shivansh	Administration	Parttime	55000	7
+5	Akash	Marketing	Fulltime	57900	3
+6	Soumya	Technical	Intern	64300	2
+7	Karthik	Administration	Intern	110000	8
+df.groupby('Type')['Name'].apply(list)
+Type
+Fulltime                       [Asha, Akash]
+Intern      [Harsh, Sourav, Soumya, Karthik]
+Parttime                  [Hritik, Shivansh]
+Name: Name, dtype: object
+df.loc[(df['Dept'] == 'Technical') & (df['Type'] == 'Parttime')]
+Name	Dept	Type	Salary	Years
+3	Hritik	Technical	Parttime	67800	4
+df.groupby('Dept').agg({'Salary': ['mean', 'sum']})
+Salary
+mean	sum
+Dept		
+Administration	95000.000000	285000
+Marketing	53950.000000	107900
+Technical	67366.666667	202100
+df.loc[(df['Years'] > 2)]
+Name	Dept	Type	Salary	Years
+0	Asha	Administration	Fulltime	120000	10
+2	Sourav	Technical	Intern	70000	3
+3	Hritik	Technical	Parttime	67800	4
+4	Shivansh	Administration	Parttime	55000	7
+5	Akash	Marketing	Fulltime	57900	3
+7	Karthik	Administration	Intern	110000	8
+df.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 8 entries, 0 to 7
+Data columns (total 5 columns):
+ #   Column  Non-Null Count  Dtype 
+---  ------  --------------  ----- 
+ 0   Name    8 non-null      object
+ 1   Dept    8 non-null      object
+ 2   Type    8 non-null      object
+ 3   Salary  8 non-null      int64 
+ 4   Years   8 non-null      int64 
+dtypes: int64(2), object(3)
+memory usage: 452.0+ bytes
+df[df['Type'] == 'Intern'].nlargest(1, 'Salary')
+Name	Dept	Type	Salary	Years
+7	Karthik	Administration	Intern	110000	8
+plt.bar(df['Name'], df['Years'], color='skyblue')
+plt.xlabel('Employee')
+plt.ylabel('Experience (Years)')
+plt.title('Employee Experience')
+plt.show()
+
+df.nsmallest(1, 'Salary')['Name']
+1    Harsh
+Name: Name, dtype: object
+df.nsmallest(1, 'Salary')
+Name	Dept	Type	Salary	Years
+1	Harsh	Marketing	Intern	50000	2
+dept=df['Dept'].unique()
+print(len(dept))
+print(dept)
+3
+['Administration' 'Marketing' 'Technical']
+29
+import pandas as pd
+data = {"age": [10,22,13,21,12,11,17],
+    "section": ["A","B","C","B","B","A","A"],
+    "city": ["Gurgaon","Delhi","Mumbai","Delhi","Mumbai","Delhi","Mumbai"],
+    "gender": ["M","F","F","M","M","M","F"],
+    "favourite_color": ["red",np.nan,"yellow",np.nan,"black","green","red"]}
+df=pd.DataFrame(data)
+df
+age	section	city	gender	favourite_color
+0	10	A	Gurgaon	M	red
+1	22	B	Delhi	F	NaN
+2	13	C	Mumbai	F	yellow
+3	21	B	Delhi	M	NaN
+4	12	B	Mumbai	M	black
+5	11	A	Delhi	M	green
+6	17	A	Mumbai	F	red
+df.groupby(['city', 'favourite_color']).size()
+city     favourite_color
+Delhi    green              1
+Gurgaon  red                1
+Mumbai   black              1
+         red                1
+         yellow             1
+dtype: int64
+df[df['age'] < 20][['gender', 'favourite_color']]
+gender	favourite_color
+0	M	red
+2	F	yellow
+4	M	black
+5	M	green
+6	F	red
+df[df['city'].str.endswith('i')]['city']
+1     Delhi
+2    Mumbai
+3     Delhi
+4    Mumbai
+5     Delhi
+6    Mumbai
+Name: city, dtype: object
+df.isnull().sum()
+age                0
+section            0
+city               0
+gender             0
+favourite_color    2
+dtype: int64
+df.fillna(value="orange")
+age	section	city	gender	favourite_color
+0	10	A	Gurgaon	M	red
+1	22	B	Delhi	F	orange
+2	13	C	Mumbai	F	yellow
+3	21	B	Delhi	M	orange
+4	12	B	Mumbai	M	black
+5	11	A	Delhi	M	green
+6	17	A	Mumbai	F	red
+df['city'].unique()
+array(['Gurgaon', 'Delhi', 'Mumbai'], dtype=object)
+gender_counts = df['gender'].value_counts()
+
+print("Number of males:", gender_counts['M'])
+print("Number of females:", gender_counts['F'])
+Number of males: 4
+Number of females: 3
+df.groupby('city')['age'].mean()
+city
+Delhi      18.0
+Gurgaon    10.0
+Mumbai     14.0
+Name: age, dtype: float64
+df.groupby('section')['age'].sum()
+section
+A    38
+B    55
+C    13
+Name: age, dtype: int64
+df['city'].value_counts()
+city
+Delhi      3
+Mumbai     3
+Gurgaon    1
+Name: count, dtype: int64
+#1
+class ZeroError(Exception):
+    pass
+try:
+    a = int(input("Enter a: "))
+    b = int(input("Enter b: "))
+    if a == 0:
+        raise ZeroError("a can't be zero")
+    if b == 0:
+        raise ZeroError("b can't be zero")
+    print("Addition:", a + b)
+    print("Subtraction:", a - b)
+    print("Multiplication:", a * b)
+    print("Division:", a / b)
+    print("Floor Division:", a // b)
+    print("Modulus:", a % b)
+    print("Exponentiation:", a ** b)
+    # Logical Operators
+    print("\nLogical Operators:")
+    print("AND Operator:", a and b)
+    print("OR Operator:", a or b)
+    print("NOT Operator for a:", not a)
+    print("NOT Operator for b:", not b)
+
+    # Bitwise Operators
+    print("\nBitwise Operators:")
+    print("Bitwise AND:", a & b)
+    print("Bitwise OR:", a | b)
+    print("Bitwise XOR:", a ^ b)
+    print("Bitwise NOT for a:", ~a)
+    print("Bitwise NOT for b:", ~b)
+    print("Left Shift for a by 1 bit:", a << 1)
+    print("Right Shift for b by 1 bit:", b >> 1)
+except ZeroError as e:
+    print(e)
+Enter a: 10
+Enter b: 5
+Addition: 15
+Subtraction: 5
+Multiplication: 50
+Division: 2.0
+Floor Division: 2
+Modulus: 0
+Exponentiation: 100000
+
+Logical Operators:
+AND Operator: 5
+OR Operator: 10
+NOT Operator for a: False
+NOT Operator for b: False
+
+Bitwise Operators:
+Bitwise AND: 0
+Bitwise OR: 15
+Bitwise XOR: 15
+Bitwise NOT for a: -11
+Bitwise NOT for b: -6
+Left Shift for a by 1 bit: 20
+Right Shift for b by 1 bit: 2
+#question20
+#Hybrid Inheritance
+
+#class 1
+class Base1:
+    def get1(self):
+        self.snum = int(input("Enter the Student Roll No:"))
+        self.sname = input("Enter the Student Name:")
+        
+    def put1(self):
+        print("Student Rollno: ", self.snum)
+        print("Student Name: ", self.sname)
+
+#child class of class 1
+class Base2(Base1):
+    def get2(self):
+        #inheriting the fuctions of parent class
+        Base1.get1(self)
+        Base1.put1(self)
+        
+        self.mark1 = int(input("Enter the Mark1:"))
+        self.mark2 = int(input("Enter the Mark2:"))
+        
+    def put2(self):
+        print("Mark1: ", self.mark1)
+        print("Mark2: ", self.mark2)
+
+#independent class
+#class 2
+class Base3:
+    def get3(self):
+        self.score = int(input("Enter the score: "))
+    def put3(self):
+        print("Score: ", self.score)
+
+
+#child class of class 1 and class 2
+class Child(Base2, Base3):
+    def put4(self):
+        #inheriting the fuctions of parent classes
+        Base2.get2(self)
+        Base2.put2(self)
+        Base3.get3(self)
+        Base3.put3(self)
+        
+        self.total = self.mark1 + self.mark2 + self.score
+        print("The total score of the student: ",self.total)
+
+s = Child()
+s.put4()
+Enter the Student Roll No:101
+Enter the Student Name:karthik
+Student Rollno:  101
+Student Name:  karthik
+Enter the Mark1:75
+Enter the Mark2:75
+Mark1:  75
+Mark2:  75
+Enter the score: 6
+Score:  6
+The total score of the student:  156
+#question21
+#multiple Inheritance
+
+#parent class1
+class Base1:
+    def get1(self):
+        self.num1 = int(input("Enter Number 1: "))
+    def put1(self):
+        print("Number 1: ", self.num1)
+        
+#parent class2
+class Base2:
+    def get2(self):
+        self.num2 = int(input("Enter Number 2: "))
+    def put2(self):
+        print("Number 2: ", self.num2)
+        
+#child class
+class Child(Base1, Base2):
+    def put3(self):
+         #inheriting the fuctions of parent classes
+        Base1.get1(self)
+        Base2.get2(self)
+        Base1.put1(self)    
+        Base2.put2(self)
+        
+        print("Addition: " , self.num1 + self.num2)
+        print("Subtraction: " , self.num1 - self.num2)
+        print("Multiplication: " , self.num1 * self.num2)
+        print("Division: " , self.num1 / self.num2)
+        print("Floor Division: " , self.num1 // self.num2)
+        print("Modulus: " , self.num1 % self.num2)
+        print("Exponentation: " , self.num1 ** self.num2)
+
+        if self.num1 > self.num2:
+            print(self.num1 , "is the greatest number")
+        else:
+            print(self.num2 , "is the greatest number")
+
+c = Child()
+c.put3()
+Enter Number 1: 101
+Enter Number 2: 50
+Number 1:  101
+Number 2:  50
+Addition:  151
+Subtraction:  51
+Multiplication:  5050
+Division:  2.02
+Floor Division:  2
+Modulus:  1
+Exponentation:  16446318218438818999219212023843297027618124642128479392075226899697009078226629490851910649612255001
+101 is the greatest number
+#question22
+#multilevel inheritance
+
+#parent class
+class Empbase:
+    def get1(self):
+        self.enum = int(input("Enter Employee ID: "))
+        self.ename = input("Enter Employee Name: ")
+        self.basic = int(input("Enter the Basic Pay:"))
+    def put1(self):
+        print("Employee ID: ",self.enum)
+        print("Employee Name: ",self.ename)
+        print("Basic Pay: ",self.basic)
+
+#child class
+class Empchild1(Empbase):
+    def get2(self):
+        #inheriting the fuctions of parent classes
+        Empbase.get1(self)
+        Empbase.put1(self)
+        
+        self.allow = int(input("Enter Allowance: "))
+        self.ded = int(input("Enter Deduction: "))
+        
+    def put2(self):
+        print("Allowance: ",self.allow)
+        print("Deduction: ",self.ded)
+        
+class Empchild2(Empchild1):
+    def get3(self):
+        #inheriting the fuctions of parent classes
+        Empchild1.get2(self)
+        Empchild1.put2(self)
+        
+        self.gross = self.basic + self.allow
+        self.net = self.gross - self.ded
+    def put3(self):
+        print("Gross: ",self.gross)
+        print("Net: ",self.net)
+        
+#main
+obj = Empchild2()
+obj.get3()
+obj.put3()
+Enter Employee ID: 101
+Enter Employee Name: Harish
+Enter the Basic Pay:35000
+Employee ID:  101
+Employee Name:  Harish
+Basic Pay:  35000
+Enter Allowance: 1000
+Enter Deduction: 500
+Allowance:  1000
+Deduction:  500
+Gross:  36000
+Net:  35500
+#question23
+#single inheritance
+
+#parent class
+class Empbase:
+    def get(self):
+        self.enum = int(input("Enter Employee ID: "))
+        self.ename = input("Enter Employee Name: ")
+        self.basic = int(input("Enter the Basic Pay:"))
+    def put(self):
+        print("Employee ID: ",self.enum)
+        print("Employee Name: ",self.ename)
+        print("Basic Pay: ",self.basic)
+
+#child class
+class Empchild(Empbase):
+    def get(self):
+        #inheriting the fuctions of parent classes
+        Empbase.get(self)
+        Empbase.put(self)
+        
+        self.allow = int(input("Enter Allowance: "))
+        self.ded = int(input("Enter Deduction: "))
+        self.gross = self.basic + self.allow
+        self.net = self.gross - self.ded
+        
+    def put(self):
+        print("Gross: ",self.gross)
+        print("Net: ",self.net)
+
+#main
+obj = Empchild()
+obj.get()
+obj.put()
+Enter Employee ID: 101
+Enter Employee Name: karthik
+Enter the Basic Pay:30000
+Employee ID:  101
+Employee Name:  karthik
+Basic Pay:  30000
+Enter Allowance: 1000
+Enter Deduction: 500
+Gross:  31000
+Net:  30500
+#question24
+#Hierarchical inheritance
+
+class Base:
+    def get(self):
+        self.num1 = int(input("Enter Number 1: "))
+        self.num2 = int(input("Enter Number 2: "))
+    def put(self):
+        print("Number 1: ", self.num1)
+        print("Number 2: ", self.num2)
+
+class Child1(Base):
+    def put1(self):
+        #inheriting the fuctions of parent classes
+        Base.get(self)
+        Base.put(self)
+        
+        print("Arithmetic Operations")
+        print("Addition: " , self.num1 + self.num2)
+        print("Subtraction: " , self.num1 - self.num2)
+        print("Multiplication: " , self.num1 * self.num2)
+        print("Division: " , self.num1 / self.num2)
+        print("Floor Division: " , self.num1 // self.num2)
+        print("Modulus: " , self.num1 % self.num2)
+        print("Exponentation: " , self.num1 ** self.num2)
+
+class Child2(Base):
+     def put2(self):
+        #inheriting the fuctions of parent classes
+        Base.get(self)
+        Base.put(self)
+        
+        print("Logical Operations")
+        print("Logical and: ",self.num1 and self.num2)
+        print("Logical or: ",self.num1 or self.num2)
+        print("Logical not: ", not self.num1)
+        print("Logical not: ", not self.num2)
+
+c1 = Child1()
+c2 = Child2()
+c1.put1()
+c2.put2()
+Enter Number 1: 10
+Enter Number 2: 5
+Number 1:  10
+Number 2:  5
+Arithmetic Operations
+Addition:  15
+Subtraction:  5
+Multiplication:  50
+Division:  2.0
+Floor Division:  2
+Modulus:  0
+Exponentation:  100000
+Enter Number 1: 10
+Enter Number 2: 5
+Number 1:  10
+Number 2:  5
+Logical Operations
+Logical and:  5
+Logical or:  10
+Logical not:  False
+Logical not:  False
+#question11
+#creation of tuple
+T = ('red' , 'blue' , 'green' , 'yellow' , 'pink')
+print("Tuple:" , T)
+
+#1.justifying tuple is immutable
+T[0]
+#T[0] = 'orange'
+print("Tuple:" , T)
+
+#2. print individual elements of tuple
+for i in T:
+    print (i)
+
+#3. Create two tuples with T1 as colors starting with “b” and others in T2
+T1 = ('beige', 'blue' , 'black', 'beige')
+T2 = ('teal','pink','gray','purple')
+
+#4. Check if “orange” is in T or not.
+if "orange" in T:
+    print("Yes, Orange is in Tuplpe T")
+else:
+    print("No, Orange is not in Tuple T")
+
+#5.Can tuple allow duplicates?
+print(T1)
+Tuple: ('red', 'blue', 'green', 'yellow', 'pink')
+Tuple: ('red', 'blue', 'green', 'yellow', 'pink')
+red
+blue
+green
+yellow
+pink
+No, Orange is not in Tuple T
+('beige', 'blue', 'black', 'beige')
+#8)Create a class called Sample with an object variable “var”. Write a Python Code to perform Arithmetic Operator Overloading for subtraction and multiplication, Relational Operator Overloading for less
+#than, greater than and equal to and Bitwise Operator Overloading for bitwise and , or.
+
+class Sample:
+    def __init__(self, var):
+        self.var = var
+
+    # Arithmetic Operator Overloading
+    def __sub__(self, other):
+        return self.var - other.var
+
+    def __mul__(self, other):
+        return self.var * other.var
+
+    # Relational Operator Overloading
+    def __lt__(self, other):
+        return self.var < other.var
+
+    def __gt__(self, other):
+        return self.var > other.var
+
+    def __eq__(self, other):
+        return self.var == other.var
+
+    # Bitwise Operator Overloading
+    def __and__(self, other):
+        return self.var & other.var
+
+    def __or__(self, other):
+        return self.var | other.var
+
+
+# Example usage:
+
+obj1 = Sample(5)
+obj2 = Sample(3)
+
+# Arithmetic Operator Overloading
+print("Subtraction:", obj1 - obj2)  # Output: 2
+print("Multiplication:", obj1 * obj2)  # Output: 15
+# Relational Operator Overloading
+print("Less Than:", obj1 < obj2)  # Output: False
+print("Greater Than:", obj1 > obj2)  # Output: True
+print("Equal To:", obj1 == obj2)  # Output: False
+# Bitwise Operator Overloading
+print("Bitwise AND:", obj1 & obj2)  # Output: 1
+print("Bitwise OR:", obj1 | obj2)  # Output: 7
+Subtraction: 2
+Multiplication: 15
+Less Than: False
+Greater Than: True
+Equal To: False
+Bitwise AND: 1
+Bitwise OR: 7
+#9)
+#create
+d = {'a':45,'b':78,'c':34,'d':80,'e':67}
+print("Dictionary: ",d)
+
+#keys and values
+print("Keys: ")
+for i in d.keys():
+    print(i)
+print("Values: ")
+for i in d.values():
+    print(i)
+    
+#max and min
+maximum = max(d,key = d.get)
+minimum = min(d,key = d.get)
+print("\nStudents scored maximum mark: ",maximum,", marks: ",d[maximum])
+print("Students scored minimum mark: ",minimum,", marks: ",d[minimum])
+
+#sort
+s = sorted(d.items(),key =lambda x:x[1])
+for i,j in s:
+    print(i,"-",j)
+
+#modify
+d['a'] = 54
+print(d)
+
+#delete
+dlt = input("Enter the student name: ")
+if dlt in d:
+    del d[dlt]
+    print(dlt," is deleted")
+else:
+    print(dlt," is not found")
+    
+print(d)
+
+print("Number of key-value pairs: ",len(d))
+Dictionary:  {'a': 45, 'b': 78, 'c': 34, 'd': 80, 'e': 67}
+Keys: 
+a
+b
+c
+d
+e
+Values: 
+45
+78
+34
+80
+67
+
+Students scored maximum mark:  d , marks:  80
+Students scored minimum mark:  c , marks:  34
+c - 34
+a - 45
+e - 67
+b - 78
+d - 80
+{'a': 54, 'b': 78, 'c': 34, 'd': 80, 'e': 67}
+Enter the student name: a
+a  is deleted
+{'b': 78, 'c': 34, 'd': 80, 'e': 67}
+Number of key-value pairs:  4
+#12) DO THE FOLLOWING STRING OPERATIONS:
+def check_palindrome(s):
+    sr = s[::-1]
+    if s == sr:
+        print("Palindrome")
+    else:
+        print("Not a palindrome")
+        
+def compare_strings(s):
+    s1 = input("Enter another string: ")
+    if s == s1:
+        print("Equal")
+    else:
+        print("Not equal")
+        
+s = input("Enter a string: ")
+check_palindrome(s) 
+print("Length: ", len(s))
+compare_strings(s)
+
+my_str = "Consider function f(n) the time complexity of an algorithm and g(n) is the most significant term. If f(n) <= C g(n) for all n >= 1, C > 0, then we can represent f(n) as O(g(n))"
+print(my_str.count("the"))
+upper, lower, digits, spaces, specials = 0, 0, 0, 0, 0
+for c in my_str:
+    if c.isupper():
+        upper += 1
+    elif c.islower():
+        lower += 1
+    elif c.isdigit():
+        digits += 1
+    elif c.isspace():
+        spaces += 1
+    else:
+        specials += 1
+print("Upper:", upper, "Lower:", lower, "Digits:", digits, "Spaces:", spaces, "Specials:", specials)
+print(my_str.swapcase())
+Enter a string: madam
+Palindrome
+Length:  5
+Enter another string: super
+Not equal
+3
+Upper: 5 Lower: 112 Digits: 2 Spaces: 35 Specials: 22
+cONSIDER FUNCTION F(N) THE TIME COMPLEXITY OF AN ALGORITHM AND G(N) IS THE MOST SIGNIFICANT TERM. iF F(N) <= c G(N) FOR ALL N >= 1, c > 0, THEN WE CAN REPRESENT F(N) AS o(G(N))
+#15) DO THE FOLLOWING LIST OPERATIONS:
+l = []
+for i in range(1, 11):
+    print("No",i,":",end="")
+    n = int(input())
+    l.append(n)
+print("Original list:", l)
+
+# Sorting in ascending order
+asc = sorted(l)
+print("Ascending order:", asc)
+
+# Sorting in descending order
+dsc = sorted(l, reverse=True)
+print("Descending order:", dsc)
+
+def div3(l):
+    l1 = []
+    l2 = []
+    for i in l:
+        if i % 3 == 0:
+            l1.append(i)
+        else:
+            l2.append(i)
+    return l1, l2
+
+divisible_by_3, not_divisible_by_3 = div3(l)
+print("Divisible by 3:", divisible_by_3)
+print("Not divisible by 3:", not_divisible_by_3)
+
+max_num = max(divisible_by_3)
+min_num = min(not_divisible_by_3)
+
+divisible_by_3.remove(max_num)
+not_divisible_by_3.remove(min_num)
+
+print("After removing the biggest number from divisible_by_3:", divisible_by_3)
+print("After removing the smallest number from not_divisible_by_3:", not_divisible_by_3)
+No 1 :23
+No 2 :45
+No 3 :25
+No 4 :27
+No 5 :65
+No 6 :89
+No 7 :99
+No 8 :12
+No 9 :3
+No 10 :4
+Original list: [23, 45, 25, 27, 65, 89, 99, 12, 3, 4]
+Ascending order: [3, 4, 12, 23, 25, 27, 45, 65, 89, 99]
+Descending order: [99, 89, 65, 45, 27, 25, 23, 12, 4, 3]
+Divisible by 3: [45, 27, 99, 12, 3]
+Not divisible by 3: [23, 25, 65, 89, 4]
+After removing the biggest number from divisible_by_3: [45, 27, 12, 3]
+After removing the smallest number from not_divisible_by_3: [23, 25, 65, 89]
+#18)Create two sets named Deepak and Uma. The elements of Deepak are Python, Java, C, C++ while theelements of Uma are PHP, SQL, ASP.NET and C. Do the following:
+# Create sets
+Deepak = {"Python", "Java", "C", "C++"}
+Uma = {"PHP", "SQL", "ASP.NET", "C"}
+
+# Display the sets
+print("Deepak's languages:", Deepak)
+print("Uma's languages:", Uma)
+
+# Find common languages
+common_languages = Deepak.intersection(Uma)
+print("Common languages:", common_languages)
+
+# List all languages known by both
+all_languages = Deepak.union(Uma)
+print("All languages known by both:", all_languages)
+
+# List languages known by Deepak but not by Uma
+deepak_only = Deepak.difference(Uma)
+print("Languages known by Deepak only:", deepak_only)
+
+# List languages known by Uma but not by Deepak
+uma_only = Uma.difference(Deepak)
+print("Languages known by Uma only:", uma_only)
+
+# Add "Go" to Deepak
+Deepak.add("Go")
+print("Deepak's languages after adding 'Go':", Deepak)
+
+# Remove "SQL" from Uma
+Uma.remove("SQL")
+print("Uma's languages after removing 'SQL':", Uma)
+Deepak's languages: {'C++', 'Python', 'Java', 'C'}
+Uma's languages: {'SQL', 'ASP.NET', 'PHP', 'C'}
+Common languages: {'C'}
+All languages known by both: {'SQL', 'C++', 'Python', 'Java', 'C', 'ASP.NET', 'PHP'}
+Languages known by Deepak only: {'C++', 'Python', 'Java'}
+Languages known by Uma only: {'SQL', 'ASP.NET', 'PHP'}
+Deepak's languages after adding 'Go': {'C++', 'Python', 'Java', 'C', 'Go'}
+Uma's languages after removing 'SQL': {'ASP.NET', 'PHP', 'C'}
+#16)Write a Python Code to create two matrices using numpy of order 3x3, compute matrix addition andmatrix multiplication and display the results accordingly using nditer method.
+
+import numpy as np
+
+a = np.array([[1,2,3],[4,5,6],[6,7,8]])
+b = np.array([[6,5,4],[2,4,6],[7,9,2]])
+add = a + b
+mul = a @ b
+
+# Iterate over the elements of 'add'
+print("Element-wise addition:")
+for x in np.nditer(add):
+    print(x, end=" ")
+
+# Iterate over the elements of 'mul'
+print("\nMatrix multiplication:")
+for x in np.nditer(mul):
+    print(x, end=" ")
+Element-wise addition:
+7 7 7 6 9 12 13 16 10 
+Matrix multiplication:
+31 40 22 76 94 58 106 130 82 
+#19)Write a Python Code to create a One-Dimensional numpy array of 5 elements using arange() function.Print its size, dimension and compute basic statistics on the created array.
+
+import numpy as np
+a = np.arange(5,10)
+print(a)
+print("Size: ",a.size)
+print("Dimension: ",a.ndim)
+print("Max: ",np.max(a))
+print("Min: ",np.min(a))
+print("Sum: ",np.sum(a))
+print("Mean: ",np.mean(a))
+print("Median: ",np.median(a))
+print("SD: ",np.std(a))
+print("Var: ",np.var(a))
+[5 6 7 8 9]
+Size:  5
+Dimension:  1
+Max:  9
+Min:  5
+Sum:  35
+Mean:  7.0
+Median:  7.0
+SD:  1.4142135623730951
+Var:  2.0
+#17)Write a Python Code to illustrate the working of class, object, class variable, object variable,constructor, destructor and member functions.
+
+class car:
+    total_cars = 0
+    def __init__(self,brand,model):
+        car.total_cars+=1
+        self.brand = brand
+        self.model = model
+    def display_info(self):
+        print("Brand: ",self.brand)
+        print("Model: ",self.model)
+    def __del__(self):
+        car.total_cars-=1
+        print("{} and {} is destroyed".format(self.brand,self.model))
+
+car11 = car("Tesla",'Model S')
+car21 = car('Ford','Fusion')
+car11.display_info()
+print("Total: ",car.total_cars)
+del car21
+print("Total: ",car.total_cars)
+Brand:  Tesla
+Model:  Model S
+Total:  2
+Ford and Fusion is destroyed
+Total:  1
+ 
