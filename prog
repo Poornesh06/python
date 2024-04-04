@@ -1202,3 +1202,221 @@ Total:  2
 Ford and Fusion is destroyed
 Total:  1
  
+30
+import pandas as pd
+data = {"Name": ["John","Jane","Emily","Lisa","Matt"],
+    "Note": [92,94,87,82,90],
+    "Profession": ["Electrical engineer","Mechanical engineer","Data Scientist","Accountant","Athlete"],
+    "date_of_birth": ["1998-11-01","2002-08-14","1996-01-12","2002-10-24","2004-04-05"],
+    "group": ["A","B","B","A","C"]}
+df=pd.DataFrame(data)
+df
+Name	Note	Profession	date_of_birth	group
+0	John	92	Electrical engineer	1998-11-01	A
+1	Jane	94	Mechanical engineer	2002-08-14	B
+2	Emily	87	Data Scientist	1996-01-12	B
+3	Lisa	82	Accountant	2002-10-24	A
+4	Matt	90	Athlete	2004-04-05	C
+largest_rows = df.nlargest(2, 'Note')
+print("First two largest rows based on 'Note' column:")
+print(largest_rows)
+
+smallest_rows = df.nsmallest(2, 'Note')
+print("\nFirst two smallest rows based on 'Note' column:")
+print(smallest_rows)
+First two largest rows based on 'Note' column:
+   Name  Note           Profession date_of_birth group
+1  Jane    94  Mechanical engineer    2002-08-14     B
+0  John    92  Electrical engineer    1998-11-01     A
+
+First two smallest rows based on 'Note' column:
+    Name  Note      Profession date_of_birth group
+3   Lisa    82      Accountant    2002-10-24     A
+2  Emily    87  Data Scientist    1996-01-12     B
+df.iloc[[0,1],[0,1]]
+Name	Note
+0	John	92
+1	Jane	94
+df.loc[(df['Note']>90)]
+Name	Note	Profession	date_of_birth	group
+0	John	92	Electrical engineer	1998-11-01	A
+1	Jane	94	Mechanical engineer	2002-08-14	B
+df[df.Profession.str.contains('engineer')][['Name','Profession']]
+Name	Profession
+0	John	Electrical engineer
+1	Jane	Mechanical engineer
+df[df['Name'].str.startswith('J')]
+Name	Note	Profession	date_of_birth	group
+0	John	92	Electrical engineer	1998-11-01	A
+1	Jane	94	Mechanical engineer	2002-08-14	B
+df[(df['Profession'] == 'Data Scientist') | (df['Note'] > 90)]
+Name	Note	Profession	date_of_birth	group
+0	John	92	Electrical engineer	1998-11-01	A
+1	Jane	94	Mechanical engineer	2002-08-14	B
+2	Emily	87	Data Scientist	1996-01-12	B
+df.iloc[[2,3,4],[2]]
+Profession
+2	Data Scientist
+3	Accountant
+4	Athlete
+df[df['group'].isin(['A', 'C'])]['Name']
+0    John
+3    Lisa
+4    Matt
+Name: Name, dtype: object
+df[df['Profession'] == 'Athlete']['Name']
+4    Matt
+Name: Name, dtype: object
+df['date_of_birth'] = pd.to_datetime(df['date_of_birth'])
+
+# Filter the DataFrame for persons born after 2000
+filtered_df = df[df['date_of_birth'].dt.year > 2000]
+print(filtered_df)
+   Name  Note           Profession date_of_birth group
+1  Jane    94  Mechanical engineer    2002-08-14     B
+3  Lisa    82           Accountant    2002-10-24     A
+4  Matt    90              Athlete    2004-04-05     C
+
+pip install mysql-connector-python
+Requirement already satisfied: mysql-connector-python in c:\users\user\anaconda3\lib\site-packages (8.3.0)
+Note: you may need to restart the kernel to use updated packages.
+import mysql.connector as sql
+db = sql.connect(host="localhost",user="root",password="root",database="db")
+c = db.cursor()
+while(True):
+    print("1. Create table")
+    print("2. Insert rows")
+    print("3. Update rows")
+    print("4. Delete rows")
+    print("5. Display")
+    print("6. Exit")
+    
+    opt = int(input("Enter your choice: "))
+    if opt == 1:
+        c.execute("Create table if not exists student(snum int,sname varchar(10),m1 int,m2 int,total int)")
+        print("Table created \n")
+    elif opt == 2:
+        v1 = int(input("Enter snum: "))
+        v2 = input("Enter student name: ")
+        v3 = int(input("Enter m1: "))
+        v4 = int(input("Enter m2: "))
+        v5 = v3+v4
+        v = [v1,v2,v3,v4,v5]
+        sql = "Insert into student(snum,sname,m1,m2,total) values (%s,%s,%s,%s,%s)"
+        c.execute(sql,v)
+        db.commit()
+        print(c.rowcount," rows inserted\n")
+    elif opt == 3:
+        v1 = int(input("Enter snum whose mark must be updated: "))
+        v3 = int(input("Enter m1: "))
+        v4 = int(input("Enter m2: "))
+        v5 = v3+v4
+        v = [v3,v4,v5,v1]
+        sql = "Update student set m1 = %s , m2 = %s, total = %s where snum = %s"
+        c.execute(sql,v)
+        db.commit()
+        print(c.rowcount," rows updated\n")
+    elif opt == 4:
+        v=input("Enter the person name to be deleted:")
+        val=(v,)
+        sql = "DELETE FROM student WHERE snum = %s"
+        c.execute(sql, val)
+        db.commit()
+        print(c.rowcount,"record(s) deleted \n")
+    elif opt == 5:
+        c.execute("Select * from student")
+        res = c.fetchall()
+        for i in res:
+            print(i)
+        print(c.rowcount," rows displayed\n")
+    else:
+        db.close()
+        print("Exit the program")
+        break
+1. Create table
+2. Insert rows
+3. Update rows
+4. Delete rows
+5. Display
+6. Exit
+Enter your choice: 1
+Table created 
+
+1. Create table
+2. Insert rows
+3. Update rows
+4. Delete rows
+5. Display
+6. Exit
+Enter your choice: 2
+Enter snum: 101
+Enter student name: AA
+Enter m1: 98
+Enter m2: 97
+1  rows inserted
+
+1. Create table
+2. Insert rows
+3. Update rows
+4. Delete rows
+5. Display
+6. Exit
+Enter your choice: 2
+Enter snum: 102
+Enter student name: BB
+Enter m1: 87
+Enter m2: 96
+1  rows inserted
+
+1. Create table
+2. Insert rows
+3. Update rows
+4. Delete rows
+5. Display
+6. Exit
+Enter your choice: 3
+Enter snum whose mark must be updated: 102
+Enter m1: 97
+Enter m2: 96
+1  rows updated
+
+1. Create table
+2. Insert rows
+3. Update rows
+4. Delete rows
+5. Display
+6. Exit
+Enter your choice: 5
+(101, 'AA', 98, 97, 195)
+(102, 'BB', 97, 96, 193)
+2  rows displayed
+
+1. Create table
+2. Insert rows
+3. Update rows
+4. Delete rows
+5. Display
+6. Exit
+Enter your choice: 4
+Enter the person name to be deleted:102
+1 record(s) deleted 
+
+1. Create table
+2. Insert rows
+3. Update rows
+4. Delete rows
+5. Display
+6. Exit
+Enter your choice: 5
+(101, 'AA', 98, 97, 195)
+1  rows displayed
+
+1. Create table
+2. Insert rows
+3. Update rows
+4. Delete rows
+5. Display
+6. Exit
+Enter your choice: 6
+Exit the program
+ 
