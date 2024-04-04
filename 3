@@ -1,0 +1,12 @@
+def reverse():
+    num=int(input("Enter a number:"))
+    print("The given number is ",num)
+    sum=0
+    print("Reversed number is ",end="")
+    while(num>0):
+        r=num%10
+        print(r,end="")
+        sum=sum+r
+        num//=10 #num=num//10
+    print("\nSum of its digits is",sum) 
+reverse()
